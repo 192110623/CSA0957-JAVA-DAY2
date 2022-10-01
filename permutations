@@ -1,0 +1,66 @@
+import java.util.ArrayList;
+ 
+public class permutations
+{
+ 
+   
+    static boolean isPresent(String s, ArrayList<String> Res)
+    {
+ 
+        for (String str : Res) {
+ 
+            if (str.equals(s))
+                return true;
+        }
+ 
+       
+        return false;
+    }
+ 
+   
+    static ArrayList<String> distinctPermute(String str)
+    {
+ 
+       
+        if (str.length() == 0) {
+ 
+          
+            ArrayList<String> baseRes = new ArrayList<>();
+            baseRes.add("");
+            return baseRes;
+        }
+ 
+     
+        char ch = str.charAt(0);
+ 
+    
+        String restStr = str.substring(1);
+ 
+       
+        ArrayList<String> prevRes = distinctPermute(restStr);
+ 
+      
+        ArrayList<String> Res = new ArrayList<>();
+        for (String s : prevRes) {
+            for (int i = 0; i <= s.length(); i++) {
+                String f = s.substring(0, i) + ch + s.substring(i);
+ 
+             
+                if (!isPresent(f, Res))
+ 
+                   
+                    Res.add(f);
+            }
+        }
+ 
+    
+        return Res;
+    }
+ 
+   
+    public static void main(String[] args)
+    {
+        String s = "abbb";
+        System.out.println(distinctPermute(s));
+    }
+}
